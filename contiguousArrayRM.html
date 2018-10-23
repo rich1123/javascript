@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Js Contiguous Sub Array PT 25</title>
+</head>
+<body>
+
+<!--<button onclick="contiguJawn(uSList)">Max Length</button><br>-->
+<!--<button onclick="contiguJawn(uSList2)">Try Again</button><br>-->
+<!--<button onclick="contiguJawn(uSList3)">And Again</button>-->
+
+
+<!--<script>-->
+
+    <!--var uSList = [3, 7, 0, 2, 6, 8, 13, 26, 39];-->
+    <!--var uSList2 = [2, 3, 5, 12, 17, 29, 58, 116, 232, 464, 928];-->
+    <!--var uSList3 = [1, 2, 3, 4, 5, 9, 8, 7, 6];-->
+
+
+    <!--function contiguJawn(myList)-->
+    <!--{-->
+        <!--var n = myList.length;-->
+
+        <!--var max_len = 1;-->
+        <!--for (var i=0; i<n-1; i++)-->
+        <!--{-->
+
+            <!--var min = myList[i];-->
+            <!--var max = myList[i];-->
+
+            <!--for (var j=i+1; j<n; j++)-->
+            <!--{-->
+                <!--min = Math.min(min, myList[j]);-->
+                <!--max = Math.max(max, myList[j]);-->
+
+
+                <!--if ((max - min) == j-i)-->
+                    <!--max_len = Math.max(max_len, max-min+1);-->
+            <!--}-->
+        <!--}-->
+
+        <!--alert(max_len);-->
+        <!--return max_len;-->
+    <!--}-->
+
+<!--</script>-->
+
+
+
+<!--<script>-->
+
+    <!--var unsortedList = [51, 40, 22, 26, 23, 25, 24, 100, 1];-->
+
+    <!--function maxLength(myList)-->
+    <!--{-->
+        <!--var n = myList.length;-->
+        <!--var mxVal = Math.max(unsortedList.length);-->
+        <!--var mnVal = Math.min(unsortedList.length);-->
+
+        <!--if ((n - 1) == (mxVal - mnVal))-->
+            <!--return (n - 1);-->
+
+        <!--var max_len = 1;-->
+        <!--for (var i=0; i<n-1; i++)-->
+        <!--{-->
+
+            <!--var mn = myList[i];-->
+            <!--var mx = myList[i];-->
+
+            <!--for (var j=i+1; j<n; j++)-->
+            <!--{-->
+                <!--mn = Math.min(mn, myList[j]);-->
+                <!--mx = Math.max(mx, myList[j]);-->
+
+
+                <!--if ((mx - mn) == j-i)-->
+                    <!--max_len = Math.max(max_len, mx-mn+1);-->
+            <!--}-->
+        <!--}-->
+
+        <!--alert(max_len);-->
+        <!--return max_len;-->
+    <!--}-->
+
+<!--</script>-->
+
+
+</body>
+</html>

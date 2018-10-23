@@ -1,0 +1,19 @@
+<!-- © 2017 Hussian School of Art, Inc.  d/b/a Hussian College -->
+<!DOCTYPE html>
+<html>
+<head>
+<body>
+<script>
+    var str = 'To be, or not to be, that is the question.';
+    var count = 0;
+    var pos = str.indexOf('e');
+
+    while (pos !== -1) {
+        count++;
+        pos = str.indexOf('e', pos + 1);
+    }
+
+    console.log(count); // displays 4
+</script>
+</body>
+</html>
