@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Javascript Adv Pt 1 Slide 25</title>
+</head>
+<body>
+
+<script>
+
+    function Stack() {
+        this.number = 0;
+        this.item = [];
+    }
+
+    Stack.prototype.push = function (value) {
+        this.item [this.number++] = value;
+    };
+
+    Stack.prototype.pop = function () {
+        return this.item [--this.number];
+    };
+        debugger;
+
+        var stackOne = new Stack();
+        stackOne.push(1);
+        stackOne.push(2);
+        stackOne.push(3);
+        alert(stackOne.pop() + " " + stackOne.pop() + "" + stackOne.pop());
+
+</script>
+
+
+</body>
+</html>
+

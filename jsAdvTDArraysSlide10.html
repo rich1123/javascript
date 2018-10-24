@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Javascript Adv Pt 1 Slide 10</title>
+</head>
+<body>
+
+<script>
+
+
+    var my2DArray = [['A Tale of Two Cities', "Charles", "Dickens"],
+        ["Crime & Punishment", "Fyodor", "Dostoyevsky"],
+        ["The Great Gatsby", "F. Scott", "Fitzgerald"],
+        ["Fletch", "Gregory", "McDonald"],
+        ["Fletch Too", "Gregory", "McDonald"]];
+
+    authorSearch(my2DArray, "Gregory", "Mcdonald");
+    authorSearch(my2DArray, "F. Scott", "Fitzgerald");
+
+    function authorSearch(array, first, last) {
+        for (var i = 0; i < my2DArray.length; i++) {
+            if (first == array[i][1] && last == array[i][2])
+            console.log(array[0][i]);
+
+        }
+    }
+
+    debugger;
+
+</script>
+
+
+</body>
+</html>
+

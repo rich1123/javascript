@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Javascript Algo Bubble Sort</title>
+</head>
+<body>
+
+<script>
+
+
+ function myBubble (myList) {
+     var swapped;
+     var temp;
+     do {
+         swapped = false;
+         for (var i = 0; i < myList.length - 1; i++) {
+             if (myList[i] > myList[i + 1]) {
+                 temp = myList[i];
+                 myList[i] = myList[i + 1];
+                 myList [i + 1] = temp;
+                 swapped = true;
+             }
+             }
+         } while (swapped === true);
+         return myList;
+     }
+     debugger;
+     var myArray = [5, 30, 11, 64, 46];
+     alert(myBubble(myArray));
+
+
+
+</script>
+
+
+</body>
+</html>
+

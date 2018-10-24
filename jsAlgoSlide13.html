@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Javascript Algo Insertion Sort</title>
+</head>
+<body>
+
+<script>
+
+
+    function firstInsSort(myList) {
+        var key;
+        var j;
+
+        for (var i = 1; i < myList.length; i++) {
+            key = myList[i];
+            j = i - 1;
+
+            /* Move elements of arr[0..i-1], that are
+             greater than key, to one position ahead
+             of their current position */
+            while (j >= 0 && myList[j] > key) {
+                myList[j + 1] = myList[j];
+                j = j - 1;
+            }
+            myList[j + 1] = key;
+        }
+        return myList;
+    }
+    debugger;
+        var myArray = [6, 18, 36, 24, 72];
+        alert(firstInsSort(myArray));
+    //
+    var myArray2 = [22, 33, 88, 77, 55];
+    alert(firstInsSort(myArray2));
+
+</script>
+
+
+</body>
+</html>
+
