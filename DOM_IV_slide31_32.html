@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>DOM IV Sl. 30</title>
+</head>
+<body>
+<h1>US Gov Census API</h1>
+<form>
+    <input type="submit" value="Query API">
+</form>
+
+<div id="target">
+
+</div>
+
+<script type="application/javascript">
+    var url = 'https://s3.amazonaws.com/squat.ninja/country-codes_json.json';
+
+    var form = document.querySelector('form');
+    form.addEventListener('submit', mySubmitEventHandler);
+
+    var target = document.getElementById('target');
+
+    var Fip = new Array();
+    var countryInfo = new Array();
+    const countryInfoFIPSCode = 0;
+    const countryInfoReturnflag = 1;
+    const countryInfoLifeExpectancy = 2;
+    const countryInfoCountryName = 3;
+
+    var countriesWith = 0;
+    var countriesWithout = 0;
+
+    function mySubmitEventHandler(evt) {
+        evt.preventDefault();
+
+        var xhr = new XMLHttpRequest();
+        xhr.addEventListener('load', requestListener);
+        xhr.open('GET', url);
+        xhr.send();
+
+        setTimeout(computerTotalsCallback, 5000);
+    }
+
+    function requestListener() {
+        var data = JSON.parse(this.response);
+        debugger;
+        var countryTicker = 0;
+
+        for (var i = 0; i < data.length; i++) {
+            if (data[i].FIPS) {
+                countryInfo[countryTicker++] = new Array(data[i].FIPS, false);
+
+
+//        Fip = new Array(data);
+//        fValues = data[i].FIPS;5925
+
+                var url = 'http://api.census.gov/data/timeseries/idb/5year?get=NAME,E0,POP,AREA_KM2&FIPS=' + data[i].FIPS + '&time=2012&key=bccbe86080a37f9b4494b5427e982f6e1eee7a3e';
+
+                var xhrageAvg = new XMLHttpRequest();
+                xhrageAvg.addEventListener('load', ageback);
+                xhrageAvg.open('GET', url);
+                xhrageAvg.send();
+
+            }
+
+        }
+    }
+
+    function ageback() {
+//        var data = JSON.parse(this.response);
+        if (this.status != 204) {
+            var data = JSON.parse(this.response);
+        }
+        else {
+            countriesWithout++;
+            return;
+        }
+        if (data[1][1] != null) {
+
+            countriesWith++;
+            var i;
+
+            var complete = true;
+            for (i = 0; i < countryInfo.length; i++) {
+                if (countryInfo[i][countryInfoFIPSCode] == data[1][4]) {
+                    countryInfo[i][countryInfoReturnflag] = true;
+                    countryInfo[i][countryInfoLifeExpectancy] = data[1][1];
+                    countryInfo[i][countryInfoCountryName] = data[1][0];
+                }
+
+                if (countryInfo[i][countryInfoReturnflag] == false)
+                    complete = false;
+            }
+
+            if (complete) {
+                computerTotalsCallback();
+            }
+        }
+
+    }
+
+    function computerTotalsCallback() {
+        var minCountry = countryInfo[0][countryInfoCountryName];
+        var minLifeExpectancy = countryInfo[0][countryInfoLifeExpectancy];
+        var maxCountry = countryInfo[0][countryInfoCountryName];
+        var maxLifeExpectancy = countryInfo[0][countryInfoLifeExpectancy];
+        var sumLifeExpectancy = 0;
+        var returnedCountries = 0;
+
+
+        debugger;
+
+        var i;
+        for (i = 1; i < countryInfo.length; i++) {
+            if (countryInfo[i][countryInfoReturnflag]) {
+                returnedCountries++;
+                if (countryInfo[i][2] < minLifeExpectancy) {
+                    minCountry = countryInfo[i][countryInfoCountryName];
+                    minLifeExpectancy = countryInfo[i][countryInfoLifeExpectancy];
+                }
+
+                if (countryInfo[i][2] > maxLifeExpectancy) {
+                    maxCountry = countryInfo[i][countryInfoCountryName];
+                    maxLifeExpectancy = countryInfo[i][countryInfoLifeExpectancy];
+                }
+
+                sumLifeExpectancy += parseFloat(countryInfo[i][countryInfoLifeExpectancy]);
+            }
+        }
+
+        var avgLifeExpectancy = sumLifeExpectancy / returnedCountries;
+
+
+        var p = document.createElement('p');
+        var textNode = document.createTextNode("# Countries Returned - " + returnedCountries + ", Average Life Expectancy: " + avgLifeExpectancy.toFixed(2));
+        p.appendChild(textNode);
+        var target = document.getElementById("target");
+        target.appendChild(p);
+
+        var p = document.createElement('p');
+        var textNode = document.createTextNode("Minimum Life Expectancy -  " + minCountry + ", " + minLifeExpectancy);
+        p.appendChild(textNode);
+        var target = document.getElementById("target");
+        target.appendChild(p);
+
+        var p = document.createElement('p');
+        var textNode = document.createTextNode("Maximum Life Expectancy - " + maxCountry + ", " + maxLifeExpectancy);
+        p.appendChild(textNode);
+        var target = document.getElementById("target");
+        target.appendChild(p);
+    }
+
+
+</script>
+</body>
+</html>
